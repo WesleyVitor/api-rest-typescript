@@ -1,6 +1,5 @@
 import sqlite3 from "sqlite3";
 import invariant from "tiny-invariant";
-
 const DATABASE_FILE = process.env.DATABASE_FILE;
 invariant(DATABASE_FILE, "Arquivo não encontrado");
 export const openConection = () => {

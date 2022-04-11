@@ -17,7 +17,7 @@ const insertProduct = (req: Request, res: Response) => {
 
   const product = req.body as Product;
   return ProductModel.insertProduct(product)
-    .then((product) => res.json(product))
+    .then(() => res.status(200).json({ msg: "OK" }))
     .catch((err) => internalServerError(res, err));
 };
 

@@ -1,4 +1,6 @@
 import { dbQuery, dbQueryFirst } from "../service/db";
+import { PrismaClient } from "@prisma/client";
+export const prisma = new PrismaClient();
 
 export type Product = {
   id: number;
@@ -6,16 +8,9 @@ export type Product = {
   price: number;
 };
 const insertProduct = async (product: Product) => {
-  await dbQuery("INSERT INTO product (name, price) VALUES (?,?)", [
-    product.name,
-    product.price,
-  ]);
-
-  const value_return = await dbQuery(
-    'SELECT seq as Id FROM sqlite_sequence WHERE name="product";'
-  );
-
-  return value_return[0].Id;
+  await prisma.product.create({
+    data: product,
+  });
 };
 
 const updateProduct = async (product: Product) => {
