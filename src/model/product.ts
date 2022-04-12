@@ -1,4 +1,3 @@
-import { dbQuery, dbQueryFirst } from "../service/db";
 import { PrismaClient } from "@prisma/client";
 export const prisma = new PrismaClient();
 
@@ -6,6 +5,8 @@ export type Product = {
   id: number;
   name: string;
   price: number;
+  createdAt: Date;
+  updatedAt: Date;
 };
 const insertProduct = async (product: Product) => {
   await prisma.product.create({
@@ -14,28 +15,42 @@ const insertProduct = async (product: Product) => {
 };
 
 const updateProduct = async (product: Product) => {
-  await dbQuery(`UPDATE product SET name = ?, price = ? WHERE id = ?`, [
-    product.name,
-    product.price,
-    product.id,
-  ]);
+  await prisma.product.update({
+    data: {
+      name: product.name,
+      price: product.price,
+    },
+    where: {
+      id: product.id,
+    },
+  });
+
   return getProduct(product.id);
 };
 
 const listProducts = async () => {
-  const values = await dbQuery("SELECT * FROM product");
+  const values = await prisma.product.findMany();
   return values as Product[];
 };
 
-const getProduct = async (id: number) => {
-  const product = await dbQueryFirst("SELECT * FROM product WHERE id=?", [id]);
+const getProduct = async (id_product: number) => {
+  const product = await prisma.product.findFirst({
+    where: {
+      id: id_product,
+    },
+  });
+
   return (product as Product) || undefined;
 };
 
-const deleteProduct = async (id: number) => {
-  const product = await getProduct(id);
-  await dbQueryFirst("DELETE FROM product WHERE id=?", [id]);
-
+const deleteProduct = async (id_product: number) => {
+  const product = await getProduct(id_product);
+  //await dbQueryFirst("DELETE FROM product WHERE id=?", [id]);
+  await prisma.product.delete({
+    where: {
+      id: id_product,
+    },
+  });
   return (product as Product) || undefined;
 };
 
