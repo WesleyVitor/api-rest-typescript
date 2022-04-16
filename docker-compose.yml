@@ -1,5 +1,15 @@
 version: "3"
 services:
+  app:
+    image: crud-typescript
+    build: .
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+
   postgres:
     container_name: postgres_crud_typescript
     image: postgres
