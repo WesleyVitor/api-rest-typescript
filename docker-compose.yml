@@ -1,14 +1,16 @@
-version: "3"
+version: "3.9"
 services:
   app:
+    stdin_open: true
     image: crud-typescript
     build: .
     ports:
-      - 3000:3000
+      - "3000:3000"
+    depends_on:
+      - postgres
     env_file:
       - .env
-    volumes:
-      - .:/app
+    restart: always
 
   postgres:
     container_name: postgres_crud_typescript
@@ -21,6 +23,7 @@ services:
       - '5432:5432'
     volumes:
       - postgres-db:/var/lib/postgresql/data
+
   pgadmin:
     container_name: pgadmin_crud_typescript
     image: dpage/pgadmin4
