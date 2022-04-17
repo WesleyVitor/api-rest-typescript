@@ -4,6 +4,3 @@
 
 ` docker-compose up`
 
-## Rode o projeto
-
-` npm run dev`
