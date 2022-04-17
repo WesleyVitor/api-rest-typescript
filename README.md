@@ -1,4 +1,4 @@
-# Crud usando Express, Typescript e SQLite
+# Crud usando Express, Typescript, PostGres e Docker
 
 ## Rode o comando para iniciar o docker
 
