@@ -10,8 +10,8 @@ services:
       - postgres
     env_file:
       - .env
-    restart: always
-
+    volumes:
+      - .:/app
   postgres:
     container_name: postgres_crud_typescript
     image: postgres
