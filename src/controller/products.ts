@@ -54,7 +54,13 @@ const updateProduct = async (req: Request, res: Response) => {
 
 const listProducts = ({}: Request, res: Response) => {
   ProductModel.listProducts()
-    .then((products) => res.json(products))
+    .then((products) => {
+      if (products) {
+        return res.status(200).json(products);
+      } else {
+        return notFound(res);
+      }
+    })
     .catch((err) => internalServerError(res, err));
 };
 
