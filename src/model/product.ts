@@ -5,13 +5,15 @@ export type Product = {
   id: number;
   name: string;
   price: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 const insertProduct = async (product: Product) => {
   await prisma.product.create({
     data: product,
   });
+
+  return await getProduct(product.id);
 };
 
 const updateProduct = async (product: Product) => {

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "@jest/globals";
 import supertest from "supertest";
-import app from "../../src/server";
+import app from "../../../src/server";
 describe("GET /products", () => {
   test("Should return status 200", async () => {
     const response = await supertest(app)
