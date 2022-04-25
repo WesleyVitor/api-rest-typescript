@@ -9,11 +9,12 @@ export type Product = {
   updatedAt?: Date;
 };
 const insertProduct = async (product: Product) => {
-  await prisma.product.create({
-    data: product,
+  return await prisma.product.create({
+    data: {
+      name: product.name,
+      price: product.price,
+    },
   });
-
-  return await getProduct(product.id);
 };
 
 const updateProduct = async (product: Product) => {
