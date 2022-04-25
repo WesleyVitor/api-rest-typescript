@@ -17,17 +17,12 @@ const insertProduct = async (product: Product) => {
 };
 
 const updateProduct = async (product: Product) => {
-  await prisma.product.update({
-    data: {
-      name: product.name,
-      price: product.price,
-    },
+  return await prisma.product.update({
+    data: product,
     where: {
       id: product.id,
     },
   });
-
-  return getProduct(product.id);
 };
 
 const listProducts = async () => {

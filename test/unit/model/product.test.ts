@@ -23,4 +23,27 @@ describe("Function Model Products ", () => {
       price: 56.4,
     });
   });
+
+  test("Should update a existed product", async () => {
+    let createdAt = new Date();
+    let updatedAt = new Date();
+
+    const product = {
+      id: 1,
+      createdAt,
+      updatedAt,
+      name: "Cadeira",
+      price: 56.4,
+    };
+
+    prismaMock.product.update.mockResolvedValue(product);
+
+    await expect(ProductModel.updateProduct(product)).resolves.toEqual({
+      id: 1,
+      createdAt,
+      updatedAt,
+      name: "Cadeira",
+      price: 56.4,
+    });
+  });
 });
