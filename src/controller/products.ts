@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Product, ProductModel } from "../model/product";
+import { Product, ProductModel } from "../repository/product";
 import { badRequest, internalServerError, notFound } from "../service/util";
 const insertProduct = (req: Request, res: Response) => {
   {
