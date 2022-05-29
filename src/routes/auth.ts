@@ -3,4 +3,5 @@ import {authController} from '../controller/auth';
 export const authRoutes = Router()
 
 authRoutes.use("/login", authController.login);
+authRoutes.use("/logout", authController.logout);
 
